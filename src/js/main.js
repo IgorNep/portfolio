@@ -1,8 +1,8 @@
 import '../styles/main.css';
+document.addEventListener('DOMContentLoaded', () =>
+  localStorage.getItem('theme') === 'dark' ? darkMode() : lightMode()
+);
 
-// const aboutBtn = document.querySelector('#about-btn');
-// const projBtn = document.querySelector('#project-btn');
-// const contactBtn = document.querySelector('#contact-btn');
 const upBtn = document.querySelector('.arrow-go-home');
 
 document.addEventListener('scroll', () => {
@@ -28,7 +28,7 @@ setInterval(() => {
   personIndex = personIndex < myPersonProperties.length ? personIndex : 0;
 
   properties.forEach((property) => {
-    property.style.transform = `translateY(${-36 * personIndex}px)`;
+    property.style.transform = `translateY(${-38 * personIndex}px)`;
   });
   personIndex++;
 }, 1500);
@@ -59,3 +59,49 @@ $(document).ready(function () {
     } // End if
   });
 });
+
+const toggleSwitch = document.querySelector('input[type="checkbox"]');
+const toggleIcon = document.querySelector('#toggle-icon');
+
+document.addEventListener('DOMContentLoaded', () =>
+  localStorage.getItem('theme') === 'dark' ? darkMode() : lightMode()
+);
+
+toggleSwitch.addEventListener('change', switchTheme);
+
+function switchTheme(e) {
+  if (e.target.checked) {
+    darkMode();
+  } else {
+    lightMode();
+  }
+}
+
+function darkMode() {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  toggleIcon.children[0].className = 'fas fa-moon';
+  localStorage.setItem('theme', 'dark');
+  toggleSwitch.checked = true;
+}
+function lightMode() {
+  document.documentElement.setAttribute('data-theme', 'light');
+  toggleIcon.children[0].className = 'fas fa-sun';
+  localStorage.setItem('theme', 'light');
+}
+const navMenu = document.querySelector('.nav');
+const menuToggler = document.querySelector('.nav__toggler');
+const navLink = document.querySelectorAll('.nav__link');
+
+menuToggler.addEventListener('click', toggleMenu);
+
+function toggleMenu() {
+  navMenu.classList.toggle('active');
+  navLink.forEach((link, index) => {
+    link.addEventListener('click', toggleMenu);
+    if (link.style.animation) {
+      link.style.animation = '';
+    } else {
+      link.style.animation = `fadeIn 0.5s ease forwards ${index / 7 + 0.5}s`;
+    }
+  });
+}

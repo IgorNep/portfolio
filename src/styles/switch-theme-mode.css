@@ -3,9 +3,7 @@
   display: flex;
   align-items: center;
   z-index: 100;
-  position: fixed;
-  right: 25px;
-  top: 30px;
+  padding: 10px 0;
 }
 
 .theme-switch-wrapper span {
@@ -52,7 +50,9 @@
   transition: 0.4s;
   width: 26px;
 }
-
+input {
+  outline: none;
+}
 input:checked + .slider {
   background: var(--primary-color);
 }
