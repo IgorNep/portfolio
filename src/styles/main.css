@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Kaushan+Script&family=Oswald&display=swap');
+
 @import './colors.css';
 @import './switch-theme-mode.css';
+@import './slider.css';
+
 * {
   box-sizing: border-box;
 }
 
 h1,
 h2,
-h3 {
+h3,
+h5 {
   font-family: Kaushan Script, sans-serif;
   font-size: 32px;
 }
@@ -36,7 +40,10 @@ body {
   margin: 0 auto;
   padding: 0 10px;
 }
-
+.marked-text {
+  background-color: var(--primary-color);
+  padding: 1px 3px;
+}
 .nav__toggler {
   width: 30px;
   height: 30px;
@@ -54,6 +61,7 @@ body {
   position: absolute;
   top: 10px;
   left: 0;
+  transition: all 0.5s ease-in-out;
 }
 .nav__toggler::after {
   content: '';
@@ -64,11 +72,14 @@ body {
   position: absolute;
   top: 25px;
   left: 0;
+  transition: all 0.5s ease-in-out;
 }
 
 .nav {
-  padding: 15px 30px;
-  left: 0vh;
+  transition: 0.6s;
+  padding: 20px 40px;
+  left: 0;
+  top: 0;
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -78,6 +89,9 @@ body {
   font-family: Oswald, sans-serif;
   background: var(--on-primary);
   box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.5);
+}
+.nav.sticky {
+  padding: 3px 40px;
 }
 .nav__link {
   text-decoration: none;
@@ -90,8 +104,12 @@ body {
 .nav__link:hover {
   color: var(--on-background);
 }
+.text-marked {
+  font-style: italic;
+  font-weight: 900;
+}
 .btn {
-  padding: 12px;
+  padding: 12px 24px;
   text-decoration: none;
   border-radius: 20px;
   background-color: var(--primary-variant);
@@ -100,11 +118,18 @@ body {
   font-weight: 900;
   font-family: Oswald, sans-serif;
   margin-top: 50px;
-  display: block;
-  width: 140px;
+  display: inline-block;
   text-align: center;
   box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
+}
+.btn__link {
+  padding: 4px 10px;
+
+  font-size: 14px;
+}
+.btn__link:nth-child(2) {
+  margin-left: 45px;
 }
 .btn:active {
   box-shadow: 0 0 0;
@@ -112,14 +137,78 @@ body {
 .tech-tools {
   color: var(--primary-variant);
 }
+.main-offer {
+  padding: 0 10px;
+}
 .main-offer__tilte {
   font-size: 50px;
   width: 320px;
   font-family: sans-serif;
+  transform: translateX(400px);
+  opacity: 0;
 }
+
+.main-offer.active .main-offer__tilte {
+  transform: translateX(0px);
+  opacity: 1;
+  animation: showTitle 1.5s ease-in-out forwards;
+}
+@keyframes showTitle {
+  0% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
 .main-offer__tilte_name {
   font-size: 50px;
   color: var(--primary-variant);
+}
+.changed-content {
+  opacity: 0;
+  transform: translateY(300px);
+}
+.main-offer.active .changed-content {
+  opacity: 1;
+  transform: translateY(0px);
+  animation: showContent 1.5s ease-in-out forwards;
+}
+.main-offer__btn {
+  opacity: 0;
+  transform: translateX(-400px);
+}
+
+.main-offer.active .main-offer__btn {
+  opacity: 1;
+  transform: translateX(0px);
+  animation: showBtn 1.2s ease-in-out forwards;
+}
+@keyframes showContent {
+  0% {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@keyframes showBtn {
+  0% {
+    opacity: 0;
+    transform: translateX(-400px);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
 .changed-content__wrapper {
   overflow: hidden;
@@ -160,9 +249,6 @@ body {
   visibility: visible;
 }
 
-/* Media Queries */
-/*Mobile devices*/
-
 /* Contact Section */
 .social-icons {
   padding: 50px;
@@ -174,6 +260,7 @@ body {
   font-size: 50px;
   cursor: pointer;
   color: var(--primary-color);
+  margin-right: 10px;
 }
 .mail-link {
   font-size: 28px;
@@ -184,7 +271,6 @@ body {
 .mail-link:hover {
   color: var(--on-background);
 }
-
 @media (max-width: 575px) {
   .container {
     max-width: 90%;
@@ -197,7 +283,7 @@ body {
     max-width: 540px;
   }
   .nav {
-    height: 10vh;
+    padding: 10px 40px;
   }
   .nav__menu {
     padding-top: 20vh;
@@ -216,7 +302,7 @@ body {
     transition: all 0.5s ease;
   }
   .nav__link {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     transform: translateX(400px);
     opacity: 0;
   }

@@ -50,7 +50,10 @@
   transition: 0.4s;
   width: 26px;
 }
-input {
+input,
+input:active,
+input:hover,
+input:focus {
   outline: none;
 }
 input:checked + .slider {
@@ -68,8 +71,7 @@ input:checked + .slider::before {
 .slider.round::before {
   border-radius: 50%;
 }
-
-.fas {
+.theme-switch-wrapper .fas {
   font-size: 30px;
   margin-right: 5px;
 }

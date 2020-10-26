@@ -1,15 +1,9 @@
 import '../styles/main.css';
+import './slider';
 document.addEventListener('DOMContentLoaded', () =>
   localStorage.getItem('theme') === 'dark' ? darkMode() : lightMode()
 );
 
-const upBtn = document.querySelector('.arrow-go-home');
-
-document.addEventListener('scroll', () => {
-  window.pageYOffset > 100
-    ? upBtn.classList.add('show')
-    : upBtn.classList.remove('show');
-});
 const propertiesWrapper = document.querySelector('.changed-content__wrapper');
 const myPersonProperties = ['commited', 'proactive', 'passionate'];
 const properties = [];
@@ -92,6 +86,18 @@ const navMenu = document.querySelector('.nav');
 const menuToggler = document.querySelector('.nav__toggler');
 const navLink = document.querySelectorAll('.nav__link');
 
+const upBtn = document.querySelector('.arrow-go-home');
+
+document.addEventListener('scroll', () => {
+  if (window.pageYOffset > 100) {
+    upBtn.classList.add('show');
+    navMenu.classList.add('sticky');
+  } else {
+    upBtn.classList.remove('show');
+    navMenu.classList.remove('sticky');
+  }
+});
+
 menuToggler.addEventListener('click', toggleMenu);
 
 function toggleMenu() {
@@ -105,3 +111,11 @@ function toggleMenu() {
     }
   });
 }
+
+/*Main Offer Animation*/
+
+const mainOffer = document.querySelector('.main-offer');
+
+document.addEventListener('DOMContentLoaded', () => {
+  mainOffer.classList.add('active');
+});

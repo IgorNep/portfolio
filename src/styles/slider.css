@@ -1,0 +1,97 @@
+/*******************************************************************************************************/
+
+.slider2 {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  margin: 10px auto;
+  /* Чтобы во время перетаскивания слайда ничего не выделить внутри него */
+  user-select: none;
+  /* Чтобы запретить скролл страницы, если мы начали двигать слайдер по оси X */
+  touch-action: pan-y;
+}
+
+/* Если где-то внутри слайдера будут изображения,
+  то нужно задать им pointer-events: none,
+  чтобы они не перетаскивались мышью */
+
+.slider2 img {
+  pointer-events: none;
+}
+
+.slider2-list {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.slider2-list.grab {
+  cursor: grab;
+}
+
+.slider2-list.grabbing {
+  cursor: grabbing;
+}
+
+.slider2-track {
+  display: flex;
+}
+
+.slide {
+  width: 100%;
+  height: 500px;
+  /* Чтобы слайды не сжимались */
+  flex-shrink: 0;
+  /* Увеличиваем и центрируем цифру внутри слайда */
+  font-size: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+  /* box-shadow: inset 1px 5px 5px rgba(0, 0, 0, 0.1); */
+  border-radius: 10px;
+}
+.slide h5 {
+  color: #fff;
+  padding: 2px 4px;
+  font-size: 22px;
+  background-color: var(--primary-variant);
+}
+.slider2-arrows {
+  text-align: center;
+  position: relative;
+}
+
+.next,
+.prev {
+  background: none;
+  border: none;
+  margin: 0 10px;
+  font-size: 60px;
+  cursor: pointer;
+  color: var(--primary-variant);
+  outline: none;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.5;
+  transition: all 0.5s ease;
+}
+.next:hover,
+.prev:hover {
+  opacity: 1;
+}
+.next {
+  right: 0;
+  top: -230px;
+}
+.prev {
+  left: 0;
+  top: -230px;
+}
+.next.disabled,
+.prev.disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
